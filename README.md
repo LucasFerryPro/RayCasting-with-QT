@@ -7,7 +7,7 @@
 ## Setup
 - Go to repository
 - Go to build directory 
-`cd build \n
-qmake \n
-make \n
+`cd build  
+qmake  
+make  
 ./RayCasting`
