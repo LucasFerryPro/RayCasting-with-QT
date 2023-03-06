@@ -6,7 +6,7 @@
 
 ## Setup
 - Go to repository
-- Go to build directory 
+- Go to build directory  
 `cd build  
 qmake  
 make  
