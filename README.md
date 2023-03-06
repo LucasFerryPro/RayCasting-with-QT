@@ -6,8 +6,10 @@
 
 ## Setup
 - Go to repository
-- Go to build directory  
-`cd build  
-qmake  
-make  
-./RayCasting`
+- Open your terminal
+- Write these lines of command:  
+<pre><code>cd build  
+qmake
+make
+./RayCasting
+</code></pre>
