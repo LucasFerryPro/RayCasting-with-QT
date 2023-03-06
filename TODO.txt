@@ -1,0 +1,14 @@
+**Mimimum**
+Géneration map 2d avec tableau en 2 dimension
+Création perso qui bouge dans la map -> Collisions
+Création champs de vision en 2d -> Raycasts
+Création de la vue 3d -> Raycasting
+Ajout minimap
+Création niveaux type labirynthe
+Création menu pour changer de niveau
+
+**Bonus**
+Correction fisheye
+Création menu principale
+Ajout texture
+Ajout sons
