@@ -1,5 +1,5 @@
 TEMPLATE = app
 TARGET = RayCasting
 QT = core gui widgets
-SOURCES += ../code/main.cpp ../code/mainwindow.cpp
-HEADERS += ../code/mainwindow.hpp
+SOURCES += ../sources/main.cpp ../sources/mainwindow.cpp
+HEADERS += ../headers/mainwindow.hpp

@@ -1,4 +1,4 @@
-#include "mainwindow.hpp"
+#include "../headers/mainwindow.hpp"
 #include <QPainter>
 #include <QPaintEvent>
 
