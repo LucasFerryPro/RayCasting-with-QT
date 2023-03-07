@@ -31,7 +31,7 @@ MainWindow::MainWindow (QWidget *parent) : QWidget(parent){
 }
 
 void MainWindow::paintEvent(QPaintEvent* event){
-    printf("paintEvent called \r \n");
+    printf("paintEvent called \n");
     QPainter painter(this);
 
     /* Draw the 2d map */ 
