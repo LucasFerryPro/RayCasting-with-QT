@@ -1,9 +1,9 @@
 #include <QGraphicsView>
 
 class View3D : public QGraphicsView{
-    public:
-
-    protected:
-
     private:
+
+    public:
+    View3D(QGraphicsScene *scene = nullptr);
+
 };

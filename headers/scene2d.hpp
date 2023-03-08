@@ -1,9 +1,8 @@
 #include <QGraphicsScene>
 
 class Scene2D : public QGraphicsScene{
-    public:
-
-    protected:
-
     private:
+
+    public:
+    Scene2D(QObject *parent = nullptr);
 };

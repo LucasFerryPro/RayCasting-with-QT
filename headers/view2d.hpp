@@ -1,9 +1,9 @@
 #include <QGraphicsView>
 
 class View2D : public QGraphicsView{
-    public:
-
-    protected:
-
     private:
+
+    public:
+    View2D(QGraphicsScene *scene = nullptr);
+
 };
