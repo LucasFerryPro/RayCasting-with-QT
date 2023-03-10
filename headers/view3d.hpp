@@ -1,3 +1,6 @@
+#ifndef VIEW3D_H
+#define VIEW3D_H
+
 #include <QGraphicsView>
 
 class View3D : public QGraphicsView{
@@ -7,3 +10,4 @@ class View3D : public QGraphicsView{
     View3D(QGraphicsScene *scene = nullptr);
 
 };
+#endif

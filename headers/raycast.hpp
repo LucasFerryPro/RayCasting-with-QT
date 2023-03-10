@@ -1,12 +1,14 @@
- #include <QRectF>
+#ifndef RAYCAST_H
+#define RAYCAST_H
 
-class Raycast: public QRectF
+#include <QLineF>
+#include <QPainterPath>
+
+class Raycast: public QLineF
 {
 private:
-    int x1;
-    int y1;
-    int x2;
-    int y2;
+    QPointF start;
+    QPointF end;
     double length;
     double angle;
 
@@ -15,7 +17,9 @@ public:
     Raycast(int x1, int y1, double angle);
     ~Raycast();
 
-    void setRaycast(int x1, int y1, double angle);
+    QPainterPath shape() const;
+
     double getRaycastLength();
     double getRaycastAngle();
 };
+#endif

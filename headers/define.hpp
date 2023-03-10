@@ -1,0 +1,5 @@
+#define WWIDTH 800
+#define WHEIGHT 400
+#define WORLD_SIZE 8
+#define CASE WHEIGHT/WORLD_SIZE
+#define LINE 3
