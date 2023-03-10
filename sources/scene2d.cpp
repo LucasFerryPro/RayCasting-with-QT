@@ -6,13 +6,18 @@
 #include <../headers/define.hpp>
 #include <../headers/case.hpp>
 
-Scene2D::Scene2D(QObject *parent) : QGraphicsScene(parent)
+#include <QKeyEvent>
+
+Player p = Player(200,150);
+
+Scene2D::Scene2D(QObject *parent, int map[WORLD_SIZE][WORLD_SIZE]) : QGraphicsScene(parent)
 {
     this->setSceneRect(0, 0, 400, 400);
     this->setBackgroundBrush(QBrush(QColor(192, 192, 192)));
+    this->setMap(map);
 }
 
-void Scene2D::draw(int map[WORLD_SIZE][WORLD_SIZE] ){
+void Scene2D::draw(){
 
     //Pens / Brushs
     QPen blackPen(Qt::black);
@@ -36,7 +41,6 @@ void Scene2D::draw(int map[WORLD_SIZE][WORLD_SIZE] ){
     }
 
     // Draw Player
-    Player p = Player(200,150);
     addEllipse(p,blackPen,playerBrush);
 
     // Draw Raycasts
@@ -45,5 +49,34 @@ void Scene2D::draw(int map[WORLD_SIZE][WORLD_SIZE] ){
 
     for (Raycast ray : r.getRays()){
         addLine(ray,raycastPen);
+    }
+}
+
+void Scene2D::keyPressEvent(QKeyEvent *event){
+    switch(event->key()){
+        case Qt::Key_Z:
+            p.setPlayerPos(p.getPlayerX() + p.getPlayerSpeed() * cos(RADIAN(p.getPlayerA())), p.getPlayerY() + p.getPlayerSpeed() * sin(RADIAN(p.getPlayerA())));
+            break;
+        case Qt::Key_S:
+            p.setPlayerPos(p.getPlayerX() - p.getPlayerSpeed() * cos(RADIAN(p.getPlayerA())), p.getPlayerY() - p.getPlayerSpeed() * sin(RADIAN(p.getPlayerA())));
+            printf("%f",p.getPlayerY() - p.getPlayerSpeed() * sin(RADIAN(p.getPlayerA())));
+            break;
+        case Qt::Key_Q:
+            p.setPlayerAngle(p.getPlayerA() - p.getPlayerTurnSpeed());
+            break;
+        case Qt::Key_D:
+            p.setPlayerAngle(p.getPlayerA() + p.getPlayerTurnSpeed());
+            break;
+    }
+    printf("Player X : %f, Player Y : %f, Player A : %f \n",p.getPlayerX(),p.getPlayerY(),p.getPlayerA());
+    this->clear();
+    this->draw();
+}
+
+void Scene2D::setMap(int map[WORLD_SIZE][WORLD_SIZE]){
+    for(int i = 0; i < WORLD_SIZE; i++){
+        for(int j = 0; j < WORLD_SIZE; j++){
+            this->map[i][j] = map[i][j];
+        }
     }
 }

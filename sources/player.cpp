@@ -11,18 +11,18 @@ Player::Player()
     setRect(0,0,10,10);
 };
 
-Player::Player(int x , int y)
+Player::Player(double x , double y)
 {
     this->player_x = x;
     this->player_y = y;
     this->player_a = 0;
-    this-> player_speed = 1;
-    this->player_turn_speed = 1;
+    this-> player_speed = 2;
+    this->player_turn_speed = 2;
     this->player_fov = 60;
     setRect(x-5,y-5,10,10);
 };
 
-Player::Player(int x, int y, double a)
+Player::Player(double x, double y, double a)
 {
     this->player_x = x;
     this->player_y = y;
@@ -33,7 +33,7 @@ Player::Player(int x, int y, double a)
     setRect(x-5,y-5,10,10);
 };
 
-Player::Player(int x, int y, double a, double s, double ts, float fov)
+Player::Player(double x, double y, double a, double s, double ts, float fov)
 {
     this->player_x = x;
     this->player_y = y;
@@ -46,9 +46,10 @@ Player::Player(int x, int y, double a, double s, double ts, float fov)
 
 Player::~Player(){};
 
-void Player::setPlayerPos(int x, int y){
+void Player::setPlayerPos(double x, double y){
     this->player_x = x;
     this->player_y = y;
+    setRect(x-5.0,y-5.0,10,10);
 };
 
 void Player::setPlayerAngle(double a){
@@ -67,11 +68,11 @@ void Player::setPlayerFOV(float fov){
     this->player_fov = fov;
 };
 
-int Player::getPlayerX(){
+double Player::getPlayerX(){
     return this->player_x;
 };
 
-int Player::getPlayerY(){
+double Player::getPlayerY(){
     return this->player_y;
 };
 

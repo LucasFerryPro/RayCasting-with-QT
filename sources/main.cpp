@@ -28,10 +28,10 @@ int main(int argc, char *argv[])
     window.setFixedSize(WWIDTH, WHEIGHT);
     window.setWindowTitle("Raycasting with QT");
 
-    Scene2D scene2d(&window); 
+    Scene2D scene2d(&window, world_map); 
     View2D view(&scene2d);
 
-    scene2d.draw(world_map);
+    scene2d.draw();
 
     // Scene3D scene3d(&window);
     // View3D view3d(&scene3d);

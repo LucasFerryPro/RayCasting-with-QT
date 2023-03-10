@@ -6,8 +6,8 @@
 
 class Player: public QRectF{
     private:
-        int player_x;
-        int player_y;
+        double player_x;
+        double player_y;
         double player_a;
         double player_speed;
         double player_turn_speed;
@@ -15,17 +15,17 @@ class Player: public QRectF{
 
     public:
         Player();
-        Player(int x , int y);
-        Player(int x, int y, double a);
-        Player(int x, int y, double a, double s, double ts, float fov);
+        Player(double x , double y);
+        Player(double x, double y, double a);
+        Player(double x, double y, double a, double s, double ts, float fov);
         ~Player();
-        void setPlayerPos(int x, int y);
+        void setPlayerPos(double x, double y);
         void setPlayerAngle(double a);
         void setPlayerSpeed(double s);
         void setPlayerTurnSpeed(double ts);
         void setPlayerFOV(float fov);
-        int getPlayerX();
-        int getPlayerY();
+        double getPlayerX();
+        double getPlayerY();
         double getPlayerA();
         double getPlayerSpeed();
         double getPlayerTurnSpeed();

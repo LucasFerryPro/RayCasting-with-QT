@@ -1,8 +1,6 @@
 #include <../headers/raycast_engine.hpp>
 #include <../headers/raycast.hpp>
-
-#define PI 3.14159265
-#define RADIAN(x) (x * PI / 180)
+#include <../headers/define.hpp>
 
 RaycastEngine::RaycastEngine(Player player, int nb_rays){
     this->player = player;

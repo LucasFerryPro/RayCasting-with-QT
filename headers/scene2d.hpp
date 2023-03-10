@@ -7,9 +7,14 @@
 
 class Scene2D : public QGraphicsScene{
     private:
+    int map[WORLD_SIZE][WORLD_SIZE];
 
     public:
-    Scene2D(QObject *parent = nullptr);
-    void draw(int map[WORLD_SIZE][WORLD_SIZE]);
+    Scene2D(QObject *parent,int map[WORLD_SIZE][WORLD_SIZE]);
+    void draw();
+    void setMap(int map[WORLD_SIZE][WORLD_SIZE]);
+
+    protected:
+    void keyPressEvent(QKeyEvent *event);
 };
 #endif
