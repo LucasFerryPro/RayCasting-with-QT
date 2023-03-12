@@ -55,11 +55,18 @@ void Scene2D::draw(){
 void Scene2D::keyPressEvent(QKeyEvent *event){
     switch(event->key()){
         case Qt::Key_Z:
-            p.setPlayerPos(p.getPlayerX() + p.getPlayerSpeed() * cos(RADIAN(p.getPlayerA())), p.getPlayerY() + p.getPlayerSpeed() * sin(RADIAN(p.getPlayerA())));
+            if(checkCollision(1)){
+                p.setPlayerPos(p.getPlayerX() + p.getPlayerSpeed() * cos(RADIAN(p.getPlayerA())), p.getPlayerY() + p.getPlayerSpeed() * sin(RADIAN(p.getPlayerA())));
+            }else{
+                printf("cant move   ");
+            }
             break;
         case Qt::Key_S:
-            p.setPlayerPos(p.getPlayerX() - p.getPlayerSpeed() * cos(RADIAN(p.getPlayerA())), p.getPlayerY() - p.getPlayerSpeed() * sin(RADIAN(p.getPlayerA())));
-            printf("%f",p.getPlayerY() - p.getPlayerSpeed() * sin(RADIAN(p.getPlayerA())));
+            if(checkCollision(2)){
+                p.setPlayerPos(p.getPlayerX() - p.getPlayerSpeed() * cos(RADIAN(p.getPlayerA())), p.getPlayerY() - p.getPlayerSpeed() * sin(RADIAN(p.getPlayerA())));
+            }else{
+                printf("cant move   ");
+            }
             break;
         case Qt::Key_Q:
             p.setPlayerAngle(p.getPlayerA() - p.getPlayerTurnSpeed());
@@ -68,10 +75,60 @@ void Scene2D::keyPressEvent(QKeyEvent *event){
             p.setPlayerAngle(p.getPlayerA() + p.getPlayerTurnSpeed());
             break;
     }
-    printf("Player X : %f, Player Y : %f, Player A : %f \n",p.getPlayerX(),p.getPlayerY(),p.getPlayerA());
+    printf("Player X : %f, Player Y : %f Player A : %f \n",p.getPlayerX(),p.getPlayerY(),p.getPlayerA());
     this->clear();
     this->draw();
 }
+
+int Scene2D::posXToCaseX(double x){
+    return floor((int(x) % WHEIGHT)/50);
+}
+
+int Scene2D::posYToCaseY(double y){
+    return floor((int(y) % WHEIGHT)/50);
+}
+
+bool Scene2D::checkCollision(int direction){
+
+    int caseX1;
+    int caseY1;
+    int caseX2;
+    int caseY2;
+
+    switch (direction){
+    case 1: //forward
+        caseX1 = posXToCaseX(
+            p.getPlayerX() + (p.getPlayerSpeed()) * cos(RADIAN(p.getPlayerA()))+5
+        );
+        caseY1 = posYToCaseY(
+            p.getPlayerY() + (p.getPlayerSpeed()) * sin(RADIAN(p.getPlayerA()))+5
+        );
+        caseX2 = posXToCaseX(
+            p.getPlayerX() + (p.getPlayerSpeed()) * cos(RADIAN(p.getPlayerA()))-5
+        );
+        caseY2 = posYToCaseY(
+            p.getPlayerY() + (p.getPlayerSpeed()) * sin(RADIAN(p.getPlayerA()))-5
+        );
+        break;
+    case 2: //backward
+        caseX1 = posXToCaseX(
+            p.getPlayerX() - (p.getPlayerSpeed()) * cos(RADIAN(p.getPlayerA()))+5
+        );
+        caseY1 = posYToCaseY(
+            p.getPlayerY() - (p.getPlayerSpeed()) * sin(RADIAN(p.getPlayerA()))+5
+        );
+        caseX2 = posXToCaseX(
+            p.getPlayerX() - (p.getPlayerSpeed()) * cos(RADIAN(p.getPlayerA()))-5
+        );
+        caseY2 = posYToCaseY(
+            p.getPlayerY() - (p.getPlayerSpeed()) * sin(RADIAN(p.getPlayerA()))-5
+        );
+    }
+
+    return (map[caseY1][caseX1] == 0 && map[caseY2][caseX2] == 0);
+}
+
+
 
 void Scene2D::setMap(int map[WORLD_SIZE][WORLD_SIZE]){
     for(int i = 0; i < WORLD_SIZE; i++){

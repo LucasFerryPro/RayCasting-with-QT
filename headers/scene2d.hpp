@@ -12,7 +12,11 @@ class Scene2D : public QGraphicsScene{
     public:
     Scene2D(QObject *parent,int map[WORLD_SIZE][WORLD_SIZE]);
     void draw();
+    bool checkCollision(int direction);
+    int posXToCaseX(double x);
+    int posYToCaseY(double y);
     void setMap(int map[WORLD_SIZE][WORLD_SIZE]);
+
 
     protected:
     void keyPressEvent(QKeyEvent *event);
