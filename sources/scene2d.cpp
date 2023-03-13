@@ -26,6 +26,8 @@ void Scene2D::draw(){
     QBrush grayBrush(QColor(212,212,212));
     QPen raycastPen (QColor(232, 158, 73));
     QBrush playerBrush (QColor(255,44,44));
+    QBrush greenBrush (QColor(44,255,44));
+    QBrush blueBrush (QColor(44,44,255));
 
     // Draw Cases
     for(int i = 0; i < WORLD_SIZE; i++){
@@ -50,6 +52,58 @@ void Scene2D::draw(){
     for (Raycast ray : r.getRays()){
         addLine(ray,raycastPen);
     }
+
+    // Draw test Collisions
+    /*
+    double angle1 = p.getPlayerA()+45;
+    double angle2 = p.getPlayerA()-45;
+    double angle3 = p.getPlayerA()+90;
+    double angle4 = p.getPlayerA()-90;
+
+    QRectF r1(
+        (p.getPlayerX() + (p.getPlayerSpeed()+3) * cos(RADIAN(angle1)))-2.5,
+        (p.getPlayerY() + (p.getPlayerSpeed()+3) * sin(RADIAN(angle1)))-2.5,
+        5,5);
+    QRectF r2(
+        (p.getPlayerX() + (p.getPlayerSpeed()+3) * cos(RADIAN(angle2)))-2.5,
+        (p.getPlayerY() + (p.getPlayerSpeed()+3) * sin(RADIAN(angle2)))-2.5,
+        5,5);
+    QRectF r3(
+        (p.getPlayerX() - (p.getPlayerSpeed()+3) * cos(RADIAN(angle1)))-2.5,
+        (p.getPlayerY() - (p.getPlayerSpeed()+3) * sin(RADIAN(angle1)))-2.5,
+        5,5);
+    QRectF r4(
+        (p.getPlayerX() - (p.getPlayerSpeed()+3) * cos(RADIAN(angle2)))-2.5,
+        (p.getPlayerY() - (p.getPlayerSpeed()+3) * sin(RADIAN(angle2)))-2.5,
+        5,5);
+    QRectF r5(
+        (p.getPlayerX() + (p.getPlayerSpeed()+3) * cos(RADIAN(p.getPlayerA())))-2.5,
+        (p.getPlayerY() + (p.getPlayerSpeed()+3) * sin(RADIAN(p.getPlayerA())))-2.5,
+        5,5);
+
+    QRectF r6(
+        (p.getPlayerX() - (p.getPlayerSpeed()+3) * cos(RADIAN(p.getPlayerA())))-2.5,
+        (p.getPlayerY() - (p.getPlayerSpeed()+3) * sin(RADIAN(p.getPlayerA())))-2.5,
+        5,5);  
+    QRectF r7(
+        (p.getPlayerX() + (p.getPlayerSpeed()+3) * cos(RADIAN(angle3)))-2.5,
+        (p.getPlayerY() + (p.getPlayerSpeed()+3) * sin(RADIAN(angle3)))-2.5,
+        5,5);
+    QRectF r8(
+        (p.getPlayerX() + (p.getPlayerSpeed()+3) * cos(RADIAN(angle4)))-2.5,
+        (p.getPlayerY() + (p.getPlayerSpeed()+3) * sin(RADIAN(angle4)))-2.5,
+        5,5);
+
+    addEllipse(r1,blackPen,blueBrush);
+    addEllipse(r2,blackPen,blueBrush);
+    addEllipse(r3,blackPen,blueBrush);
+    addEllipse(r4,blackPen,blueBrush);
+    addEllipse(r5,blackPen,blueBrush);
+    addEllipse(r6,blackPen,blueBrush);
+    addEllipse(r7,blackPen,blueBrush);
+    addEllipse(r8,blackPen,blueBrush);
+    */
+    
 }
 
 void Scene2D::keyPressEvent(QKeyEvent *event){
@@ -59,6 +113,7 @@ void Scene2D::keyPressEvent(QKeyEvent *event){
                 p.setPlayerPos(p.getPlayerX() + p.getPlayerSpeed() * cos(RADIAN(p.getPlayerA())), p.getPlayerY() + p.getPlayerSpeed() * sin(RADIAN(p.getPlayerA())));
             }else{
                 printf("cant move   ");
+                printf("%i\n",map[2][1]);
             }
             break;
         case Qt::Key_S:
@@ -81,10 +136,12 @@ void Scene2D::keyPressEvent(QKeyEvent *event){
 }
 
 int Scene2D::posXToCaseX(double x){
+    printf("\nX: %i",int(floor((int(x) % WHEIGHT)/50)));
     return floor((int(x) % WHEIGHT)/50);
 }
 
 int Scene2D::posYToCaseY(double y){
+    printf("\nY: %i\n",int(floor((int(y) % WHEIGHT)/50)));
     return floor((int(y) % WHEIGHT)/50);
 }
 
@@ -94,38 +151,88 @@ bool Scene2D::checkCollision(int direction){
     int caseY1;
     int caseX2;
     int caseY2;
+    int caseX3;
+    int caseY3;
+    int caseX4;
+    int caseY4;
+    int caseX5;
+    int caseY5;
+
+    double angle1 = p.getPlayerA()+45;
+    double angle2 = p.getPlayerA()-45;
+    double angle3 = p.getPlayerA()+90;
+    double angle4 = p.getPlayerA()-90;
 
     switch (direction){
     case 1: //forward
         caseX1 = posXToCaseX(
-            p.getPlayerX() + (p.getPlayerSpeed()) * cos(RADIAN(p.getPlayerA()))+5
+            (p.getPlayerX() + (p.getPlayerSpeed()+3) * cos(RADIAN(angle1)))
         );
         caseY1 = posYToCaseY(
-            p.getPlayerY() + (p.getPlayerSpeed()) * sin(RADIAN(p.getPlayerA()))+5
+            (p.getPlayerY() + (p.getPlayerSpeed()+3) * sin(RADIAN(angle1)))
         );
         caseX2 = posXToCaseX(
-            p.getPlayerX() + (p.getPlayerSpeed()) * cos(RADIAN(p.getPlayerA()))-5
+            (p.getPlayerX() + (p.getPlayerSpeed()+3) * cos(RADIAN(angle2)))
         );
         caseY2 = posYToCaseY(
-            p.getPlayerY() + (p.getPlayerSpeed()) * sin(RADIAN(p.getPlayerA()))-5
+            (p.getPlayerY() + (p.getPlayerSpeed()+3) * sin(RADIAN(angle2)))
+        );
+        caseX3 = posXToCaseX(
+            (p.getPlayerX() + (p.getPlayerSpeed()+3) * cos(RADIAN(p.getPlayerA())))
+        );
+        caseY3 = posYToCaseY(
+            (p.getPlayerY() + (p.getPlayerSpeed()+3) * sin(RADIAN(p.getPlayerA())))
+        );
+        caseX4 = posXToCaseX(
+            (p.getPlayerX() + (p.getPlayerSpeed()+3) * cos(RADIAN(angle3)))
+        );
+        caseY4 = posYToCaseY(
+            (p.getPlayerY() + (p.getPlayerSpeed()+3) * sin(RADIAN(angle3)))
+        );
+        caseX5 = posXToCaseX(
+            (p.getPlayerX() + (p.getPlayerSpeed()+3) * cos(RADIAN(angle4)))
+        );
+        caseY5 = posYToCaseY(
+            (p.getPlayerY() + (p.getPlayerSpeed()+3) * sin(RADIAN(angle4)))
         );
         break;
     case 2: //backward
         caseX1 = posXToCaseX(
-            p.getPlayerX() - (p.getPlayerSpeed()) * cos(RADIAN(p.getPlayerA()))+5
+            (p.getPlayerX() - (p.getPlayerSpeed()+3) * cos(RADIAN(angle1)))
         );
         caseY1 = posYToCaseY(
-            p.getPlayerY() - (p.getPlayerSpeed()) * sin(RADIAN(p.getPlayerA()))+5
+            (p.getPlayerY() - (p.getPlayerSpeed()+3) * sin(RADIAN(angle1)))
         );
         caseX2 = posXToCaseX(
-            p.getPlayerX() - (p.getPlayerSpeed()) * cos(RADIAN(p.getPlayerA()))-5
+            (p.getPlayerX() - (p.getPlayerSpeed()+3) * cos(RADIAN(angle2)))
         );
         caseY2 = posYToCaseY(
-            p.getPlayerY() - (p.getPlayerSpeed()) * sin(RADIAN(p.getPlayerA()))-5
+            (p.getPlayerY() - (p.getPlayerSpeed()+3) * sin(RADIAN(angle2)))
+        );
+        caseX3 = posXToCaseX(
+            (p.getPlayerX() - (p.getPlayerSpeed()+5) * cos(RADIAN(p.getPlayerA())))
+        );
+        caseY3 = posYToCaseY(
+            (p.getPlayerY() - (p.getPlayerSpeed()+5) * sin(RADIAN(p.getPlayerA())))
+        );
+        caseX4 = posXToCaseX(
+            (p.getPlayerX() - (p.getPlayerSpeed()+3) * cos(RADIAN(angle3)))
+        );
+        caseY4 = posYToCaseY(
+            (p.getPlayerY() - (p.getPlayerSpeed()+3) * sin(RADIAN(angle3)))
+        );
+        caseX5 = posXToCaseX(
+            (p.getPlayerX() - (p.getPlayerSpeed()+3) * cos(RADIAN(angle4)))
+        );
+        caseY5 = posYToCaseY(
+            (p.getPlayerY() - (p.getPlayerSpeed()+3) * sin(RADIAN(angle4)))
         );
     }
 
-    return (map[caseY1][caseX1] == 0 && map[caseY2][caseX2] == 0);
+    printf("%i\n",caseX3);
+    printf("%i\n",caseY3);
+
+    return (map[caseY1][caseX1] == 0 && map[caseY2][caseX2] == 0 && map[caseY3][caseX3] == 0);
 }
 
 
