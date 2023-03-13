@@ -147,16 +147,7 @@ int Scene2D::posYToCaseY(double y){
 
 bool Scene2D::checkCollision(int direction){
 
-    int caseX1;
-    int caseY1;
-    int caseX2;
-    int caseY2;
-    int caseX3;
-    int caseY3;
-    int caseX4;
-    int caseY4;
-    int caseX5;
-    int caseY5;
+    int caseX1,caseY1,caseX2,caseY2,caseX3,caseY3,caseX4,caseY4,caseX5,caseY5;
 
     double angle1 = p.getPlayerA()+45;
     double angle2 = p.getPlayerA()-45;
