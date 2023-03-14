@@ -1,7 +1,7 @@
 **Mimimum**
 Géneration map 2d avec tableau en 2 dimension ------------------ Done
 Création perso qui bouge dans la map -> Collisions ------------- Done
-Création champs de vision en 2d -> Raycasts -------------------- 
+Création champs de vision en 2d -> Raycasts -------------------- Done
 Création de la vue 3d -> Raycasting ----------------------------
 Correction fisheye ---------------------------------------------
 Ajout minimap --------------------------------------------------
