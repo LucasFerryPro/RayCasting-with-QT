@@ -12,17 +12,45 @@ RaycastEngine::~RaycastEngine(){
     this->rays.clear();
 }
 
-void RaycastEngine::emitRay(){
+void RaycastEngine::emitRay(int map[WORLD_SIZE][WORLD_SIZE]){
     this->rays.clear();
+    double angle;
     for(int i = 0; i < this->nb_rays; i++){
+        angle = RADIAN(this->player.getPlayerA()) + (i * (RADIAN(this->player.getPlayerFOV()) / this->nb_rays))
+            - (RADIAN(this->player.getPlayerFOV()) / 2) ;
         this->rays.insert (this->rays.begin(),Raycast(
             this->player.getPlayerX(), 
             this->player.getPlayerY(), 
-            RADIAN(this->player.getPlayerA()) + (i * (RADIAN(this->player.getPlayerFOV()) / this->nb_rays))
-            - (RADIAN(this->player.getPlayerFOV()) / 2) 
+            getRaycastEnd(angle, map).x(),
+            getRaycastEnd(angle, map).y(),
+            angle
             )
         );
+        // printf("Raycast %d : %f %f %f %f %f \n",i,this->player.getPlayerX(),this->player.getPlayerY(),getRaycastEnd(angle, map).x(),getRaycastEnd(angle, map).y(),angle);
     }
+}
+
+QPointF RaycastEngine::getRaycastEnd(double angle, int map[WORLD_SIZE][WORLD_SIZE]){
+    double x = this->player.getPlayerX();
+    double y = this->player.getPlayerY();
+    double x2 = x;
+    double y2 = y;
+    double step = 1;
+    double dx = step * cos(angle);
+    double dy = step * sin(angle);
+    while(map[int(posYToCaseY(y2))][int(posXToCaseX(x2))] == 0){
+        x2 += dx;
+        y2 += dy;
+    }
+    return QPointF(x2,y2);
+}
+
+int RaycastEngine::posXToCaseX(double x){
+    return floor((int(x) % WHEIGHT)/50);
+}
+
+int RaycastEngine::posYToCaseY(double y){
+    return floor((int(y) % WHEIGHT)/50);
 }
 
 std::vector<Raycast> RaycastEngine::getRays(){

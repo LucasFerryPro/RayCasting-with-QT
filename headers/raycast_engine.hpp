@@ -3,6 +3,7 @@
 
 #include <../headers/player.hpp>
 #include <../headers/raycast.hpp>
+#include <../headers/define.hpp>
 #include <vector>
 
 class RaycastEngine 
@@ -15,7 +16,10 @@ private:
 public:
     RaycastEngine(Player player, int nb_rays);
     ~RaycastEngine();
-    void emitRay();
+    void emitRay(int map[WORLD_SIZE][WORLD_SIZE]);
     std::vector<Raycast> getRays();
+    int posXToCaseX(double x);
+    int posYToCaseY(double y);
+    QPointF getRaycastEnd(double angle, int map[WORLD_SIZE][WORLD_SIZE]);
 };
 #endif

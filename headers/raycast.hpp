@@ -14,7 +14,7 @@ private:
 
 public:
     Raycast();
-    Raycast(int x1, int y1, double angle);
+    Raycast(int x1, int y1, int x2, int y2, double angle);
     ~Raycast();
 
     QPainterPath shape() const;

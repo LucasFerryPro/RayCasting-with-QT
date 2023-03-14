@@ -33,10 +33,10 @@ void Scene2D::draw(){
     for(int i = 0; i < WORLD_SIZE; i++){
         for(int j = 0; j < WORLD_SIZE; j++){
             if(map[j][i] == 1){
-                Case wall(i*CASE+LINE,j*CASE+LINE,1);
+                Case wall(i*CASE,j*CASE,1);
                 addRect(wall,blackPen,blackBrush);
             }else if (map[j][i] == 0){
-                Case wall(i*CASE+LINE,j*CASE+LINE,0);
+                Case wall(i*CASE,j*CASE,0);
                 addRect(wall,grayPen,grayBrush);
             }
         }
@@ -47,7 +47,7 @@ void Scene2D::draw(){
 
     // Draw Raycasts
     RaycastEngine r = RaycastEngine(p, 100);
-    r.emitRay();   
+    r.emitRay(map);   
 
     for (Raycast ray : r.getRays()){
         addLine(ray,raycastPen);
@@ -201,10 +201,10 @@ bool Scene2D::checkCollision(int direction){
             (p.getPlayerY() - (p.getPlayerSpeed()+3) * sin(RADIAN(angle2)))
         );
         caseX3 = posXToCaseX(
-            (p.getPlayerX() - (p.getPlayerSpeed()+5) * cos(RADIAN(p.getPlayerA())))
+            (p.getPlayerX() - (p.getPlayerSpeed()+3) * cos(RADIAN(p.getPlayerA())))
         );
         caseY3 = posYToCaseY(
-            (p.getPlayerY() - (p.getPlayerSpeed()+5) * sin(RADIAN(p.getPlayerA())))
+            (p.getPlayerY() - (p.getPlayerSpeed()+3) * sin(RADIAN(p.getPlayerA())))
         );
         caseX4 = posXToCaseX(
             (p.getPlayerX() - (p.getPlayerSpeed()+3) * cos(RADIAN(angle3)))
