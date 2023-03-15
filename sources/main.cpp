@@ -1,13 +1,13 @@
 #include <QApplication>
 #include <QMainWindow>
-#include <../headers/view2d.hpp>
 #include <../headers/scene2d.hpp>
-#include <../headers/view3d.hpp>
 #include <../headers/scene3d.hpp>
 #include <../headers/player.hpp>
 #include <../headers/raycast.hpp>
 #include <../headers/raycast_engine.hpp>
 #include <../headers/define.hpp>
+#include <QVBoxLayout>
+#include <QGraphicsView>
 
 int world_map[WORLD_SIZE][WORLD_SIZE] = {
     { 1, 1, 1, 1, 1, 1, 1, 1 },
@@ -23,21 +23,34 @@ int world_map[WORLD_SIZE][WORLD_SIZE] = {
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
-    QMainWindow window;
+    QWidget *window = new QWidget;
 
-    window.setFixedSize(WWIDTH, WHEIGHT);
-    window.setWindowTitle("Raycasting with QT");
+    window->setWindowTitle("Raycasting with QT");
 
-    Scene2D scene2d(&window, world_map); 
-    View2D view(&scene2d);
+    Player player(60,100);
+    RaycastEngine re(player,100);
+    QGraphicsView *view3d = new QGraphicsView();
+    QGraphicsView *view2d = new QGraphicsView(view3d);
+    
+    Scene3D *scene3d = new Scene3D();
+    Scene2D *scene2d = new Scene2D(world_map, player, re, scene3d); 
 
-    scene2d.draw();
+    view3d->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding); 
 
-    // Scene3D scene3d(&window);
-    // View3D view3d(&scene3d);
+    scene2d->draw();
 
-    window.setCentralWidget(&view);
+    QVBoxLayout *layout = new QVBoxLayout();
+    layout->addWidget(view3d);
 
-    window.show();
+    view3d->setScene(scene3d);
+    view2d->setScene(scene2d);        
+    
+    window->setLayout(layout);
+
+    view2d->move(30,30);
+
+    window->setFixedSize(WHEIGHT*4, WHEIGHT*4);
+
+    window->show();
     return app.exec();
 }

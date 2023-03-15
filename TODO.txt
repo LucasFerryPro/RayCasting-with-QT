@@ -2,9 +2,9 @@
 Géneration map 2d avec tableau en 2 dimension ------------------ Done
 Création perso qui bouge dans la map -> Collisions ------------- Done
 Création champs de vision en 2d -> Raycasts -------------------- Done
-Création de la vue 3d -> Raycasting ----------------------------
+Création de la vue 3d -> Raycasting ---------------------------- Done but to be improved
 Correction fisheye ---------------------------------------------
-Ajout minimap --------------------------------------------------
+Ajout minimap -------------------------------------------------- Done
 Création niveaux type labirynthe -------------------------------
 Création menu pour changer de niveau --------------------------- 
 

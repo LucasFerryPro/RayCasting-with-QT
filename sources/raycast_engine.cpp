@@ -2,6 +2,12 @@
 #include <../headers/raycast.hpp>
 #include <../headers/define.hpp>
 
+RaycastEngine::RaycastEngine(){
+    this->player = Player();
+    this->nb_rays = 0;
+    this->rays = std::vector<Raycast>();
+}
+
 RaycastEngine::RaycastEngine(Player player, int nb_rays){
     this->player = player;
     this->nb_rays = nb_rays;
@@ -23,11 +29,15 @@ void RaycastEngine::emitRay(int map[WORLD_SIZE][WORLD_SIZE]){
             this->player.getPlayerY(), 
             getRaycastEnd(angle, map).x(),
             getRaycastEnd(angle, map).y(),
-            angle
+            angle,
+            i
             )
         );
-        // printf("Raycast %d : %f %f %f %f %f \n",i,this->player.getPlayerX(),this->player.getPlayerY(),getRaycastEnd(angle, map).x(),getRaycastEnd(angle, map).y(),angle);
     }
+}
+
+void RaycastEngine::setPlayer(Player player){
+    this->player = player;
 }
 
 QPointF RaycastEngine::getRaycastEnd(double angle, int map[WORLD_SIZE][WORLD_SIZE]){
@@ -46,11 +56,11 @@ QPointF RaycastEngine::getRaycastEnd(double angle, int map[WORLD_SIZE][WORLD_SIZ
 }
 
 int RaycastEngine::posXToCaseX(double x){
-    return floor((int(x) % WHEIGHT)/50);
+    return floor((int(x) % WHEIGHT)/25);
 }
 
 int RaycastEngine::posYToCaseY(double y){
-    return floor((int(y) % WHEIGHT)/50);
+    return floor((int(y) % WHEIGHT)/25);
 }
 
 std::vector<Raycast> RaycastEngine::getRays(){

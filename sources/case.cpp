@@ -4,7 +4,7 @@
 Case::Case(int x , int y, int type){
     this->x = x;
     this->y = y;
-    this->w = WWIDTH / 2 / WORLD_SIZE - LINE;
+    this->w = WHEIGHT / WORLD_SIZE - LINE;
     this->h = WHEIGHT / WORLD_SIZE - LINE;
     this->type = type;
 

@@ -14,6 +14,7 @@ private:
     std::vector<Raycast> rays;
 
 public:
+    RaycastEngine();
     RaycastEngine(Player player, int nb_rays);
     ~RaycastEngine();
     void emitRay(int map[WORLD_SIZE][WORLD_SIZE]);
@@ -21,5 +22,6 @@ public:
     int posXToCaseX(double x);
     int posYToCaseY(double y);
     QPointF getRaycastEnd(double angle, int map[WORLD_SIZE][WORLD_SIZE]);
+    void setPlayer(Player player);
 };
 #endif
