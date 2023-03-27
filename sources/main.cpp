@@ -36,6 +36,8 @@ int main(int argc, char *argv[])
     Scene2D *scene2d = new Scene2D(world_map, player, re, scene3d); 
 
     view3d->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding); 
+    view3d->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    view3d->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
     scene2d->draw();
 

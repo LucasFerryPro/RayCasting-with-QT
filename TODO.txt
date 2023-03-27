@@ -5,10 +5,10 @@ Création champs de vision en 2d -> Raycasts -------------------- Done
 Création de la vue 3d -> Raycasting ---------------------------- Done but to be improved
 Correction fisheye ---------------------------------------------
 Ajout minimap -------------------------------------------------- Done
-Création niveaux type labirynthe -------------------------------
-Création menu pour changer de niveau --------------------------- 
 
 **Bonus**
+Création niveaux type labirynthe -------------------------------
+Création menu pour changer de niveau --------------------------- 
 Création menu principale ---------------------------------------
 Ajout texture --------------------------------------------------
 Ajout sons -----------------------------------------------------

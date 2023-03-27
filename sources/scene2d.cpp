@@ -139,7 +139,6 @@ void Scene2D::keyPressEvent(QKeyEvent *event){
             player.setPlayerAngle(player.getPlayerA() + player.getPlayerTurnSpeed());
             break;
     }
-    printf("Player X : %f, Player Y : %f Player A : %f \n",player.getPlayerX(),player.getPlayerY(),player.getPlayerA());
 
     re.setPlayer(player);
 
@@ -229,10 +228,6 @@ bool Scene2D::checkCollision(int direction){
             (player.getPlayerY() - (player.getPlayerSpeed()+3) * sin(RADIAN(angle4)))
         );
     }
-
-    printf("%i\n",caseX3);
-    printf("%i\n",caseY3);
-
     return (map[caseY1][caseX1] == 0 && map[caseY2][caseX2] == 0 && map[caseY3][caseX3] == 0);
 }
 
